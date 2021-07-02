@@ -1,18 +1,20 @@
 const Task = require('../../db/models/task/index');
 
+
 module.exports.allTasks = (req, res, next) => {
     Task.find().then(result => {
-        res.send({data: result})
+            res.send({data: result})
        });
 };
 
 module.exports.createTasks = (req, res, next) => {
     const task = new Task(req.body);
+
     task.save().then(result1 => {
         Task.find().then(result => {
             res.send({data: result})
-        })
-})
+        });
+    });
 };
 
 module.exports.editTasks = (req, res, next) => {
@@ -21,7 +23,7 @@ module.exports.editTasks = (req, res, next) => {
     }).then(result => {
         Task.find().then(result => {
             res.send({data: result})
-        })
+        });
    });
 };
 
@@ -31,16 +33,14 @@ module.exports.deleteTasks = (req, res, next) => {
     }).then(result => {
         Task.find().then(result => {
             res.send({data: result})
-        })
+        });
    });
 };  
 
 module.exports.deleteAllTasks = (req, res, next) => {
-    Task.deleteMany({
-       
-    }).then(result => {
+    Task.deleteMany().then(result => {
         Task.find().then(result => {
             res.send({data: result})
-        })
+        });
    });
 };
